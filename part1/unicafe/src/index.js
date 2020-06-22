@@ -5,12 +5,22 @@ import ReactDOM from 'react-dom'
 const Statistics = (props) => {
 
   const Statistic = ({text, value}) => {
-    return <div> {text} {value} </div>
+    return (
+      <tr>
+        <td>{text}</td>
+        <td>{value}</td>
+      </tr>
+    )
   }
 
   const Positive = ({text, value}) => {
-    return <div> {text} {value} % </div>
-  }
+    return (
+        <tr>
+          <td>{text}</td>
+          <td>{value} %</td>
+        </tr>
+      )
+    }
 
   if (props.all === 0){
     return( 
@@ -21,14 +31,16 @@ const Statistics = (props) => {
   }
 
   return (
-    <div>
-      <Statistic text={"good"} value={props.good}/>
-      <Statistic text={"neutral"} value={props.neutral}/>
-      <Statistic text={"bad"} value={props.bad}/>
-      <Statistic text={"all"} value={props.all}/>
-      <Statistic text={"average"} value={((props.good * 1 + props.neutral * 0 + props.bad * -1) / props.all)}/>
-      <Positive text={"positive"} value={(props.good / props.all * 100 )}/>
-    </div>
+      <table>
+      <tbody>
+        <Statistic text={"good"} value={props.good}/>
+        <Statistic text={"neutral"} value={props.neutral}/>
+        <Statistic text={"bad"} value={props.bad}/>
+        <Statistic text={"all"} value={props.all}/>
+        <Statistic text={"average"} value={((props.good * 1 + props.neutral * 0 + props.bad * -1) / props.all)}/>
+        <Positive text={"positive"} value={(props.good / props.all * 100 )}/>
+      </tbody>
+      </table>
   )
 
 }
@@ -41,7 +53,7 @@ const App = () => {
   const [all, setAll] = useState(0)
 
   const TextHeader = ({text}) => {
-    return <h1>{text}</h1>
+    return <h2>{text}</h2>
   }
 
   const Button = (props) => {
