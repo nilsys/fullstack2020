@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Numbers = ({persons, filter}) => {
+const Persons = ({persons, filter}) => {
 
   return (
     <div>
@@ -14,4 +14,4 @@ const Numbers = ({persons, filter}) => {
 }
 
 
-export default Numbers
+export default Persons
