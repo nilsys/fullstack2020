@@ -5,10 +5,14 @@ import Input from './components/Input'
 
 const App = () => {
   const [ persons, setPersons ] = useState([
-    { name: 'Arto Hellas', number: "040-1234567" }
+    { name: 'Arto Hellas', number: '040-123456' },
+    { name: 'Ada Lovelace', number: '39-44-5323523' },
+    { name: 'Dan Abramov', number: '12-43-234345' },
+    { name: 'Mary Poppendieck', number: '39-23-6423122' }
   ]) 
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
+  const [ newFilter, setNewFilter ] = useState('')
 
   const handleNewName = (e) => {
     setNewName(e.target.value)
@@ -16,6 +20,10 @@ const App = () => {
 
   const handleNewNumber = (e) => {
     setNewNumber(e.target.value)
+  }
+
+  const handleNewFilter = (e) => {
+    setNewFilter(e.target.value)
   }
 
   const handleSubmit = (event) => {
@@ -32,7 +40,12 @@ const App = () => {
 
   return (
     <div>
-      <h2>Phonebook</h2>
+      <div>
+        <h2>Phonebook</h2>
+        <Input name="filter shown with" value={newFilter} onChange={handleNewFilter}/>
+      </div>
+
+      <h2>add a new</h2>
       <form>
        <Input name="name:" value={newName} onChange={handleNewName}/>
        <Input name="number:" value={newNumber} onChange={handleNewNumber}/>
@@ -41,7 +54,7 @@ const App = () => {
         </div>
       </form>
       <h2>Numbers</h2>
-      <Numbers persons={persons}/>
+      <Numbers persons={persons} filter={newFilter} />
     </div>
   )
 }
