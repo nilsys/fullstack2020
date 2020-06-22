@@ -12,9 +12,18 @@ const Statistics = (props) => {
     return <div> {text} {number} % </div>
   }
 
+  if (props.all === 0){
+    return( 
+      <div> 
+      <h1>statistics</h1>
+      No feedback given 
+      </div>
+    )
+  }
+
   return (
     <div>
-      <h1>Statistics</h1>
+      <h1>statistics</h1>
       <TextSmall text={"good"} number={props.good}/>
       <TextSmall text={"neutral"} number={props.neutral}/>
       <TextSmall text={"bad"} number={props.bad}/>
