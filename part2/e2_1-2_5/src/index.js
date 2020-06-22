@@ -49,6 +49,12 @@ const App = () => {
     }
   ]
 
-  return <Course courses={courses} />
+  return (
+    <div>
+      {courses.map((course) =>
+        <Course key={course.id} course={course} />
+      )}
+    </div>
+  )
 }
 ReactDOM.render(<App />, document.getElementById('root'))
