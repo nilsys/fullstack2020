@@ -4,18 +4,17 @@ import ReactDOM from 'react-dom'
 
 const Statistics = (props) => {
 
-  const TextSmall = ({text, number}) => {
-    return <div> {text} {number} </div>
+  const Statistic = ({text, value}) => {
+    return <div> {text} {value} </div>
   }
 
-  const Positive = ({text, number}) => {
-    return <div> {text} {number} % </div>
+  const Positive = ({text, value}) => {
+    return <div> {text} {value} % </div>
   }
 
   if (props.all === 0){
     return( 
       <div> 
-      <h1>statistics</h1>
       No feedback given 
       </div>
     )
@@ -23,13 +22,12 @@ const Statistics = (props) => {
 
   return (
     <div>
-      <h1>statistics</h1>
-      <TextSmall text={"good"} number={props.good}/>
-      <TextSmall text={"neutral"} number={props.neutral}/>
-      <TextSmall text={"bad"} number={props.bad}/>
-      <TextSmall text={"all"} number={props.all}/>
-      <TextSmall text={"average"} number={((props.good * 1 + props.neutral * 0 + props.bad * -1) / props.all)}/>
-      <Positive text={"positive"} number={(props.good / props.all * 100 )}/>
+      <Statistic text={"good"} value={props.good}/>
+      <Statistic text={"neutral"} value={props.neutral}/>
+      <Statistic text={"bad"} value={props.bad}/>
+      <Statistic text={"all"} value={props.all}/>
+      <Statistic text={"average"} value={((props.good * 1 + props.neutral * 0 + props.bad * -1) / props.all)}/>
+      <Positive text={"positive"} value={(props.good / props.all * 100 )}/>
     </div>
   )
 
@@ -71,6 +69,7 @@ const App = () => {
       <Button onClick={handleGood} text={"good"}/>
       <Button onClick={handleNeutral} text={"neutral"}/>
       <Button onClick={handleBad} text={"bad"}/>
+      <TextHeader text="statistics"/>
       <Statistics good={good} neutral={neutral} bad={bad} all={all} />
     </div>
   )
