@@ -22,6 +22,11 @@ const App = () => {
         name: 'State of a component',
         exercises: 14,
         id: 3
+      },
+      {
+        name: 'This is a test',
+        exercises: 15,
+        id: 4
       }
     ]
   }
