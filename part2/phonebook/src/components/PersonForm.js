@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Input from './Input'
 
 const PersonForm = ({newName, handleNewName, newNumber, handleNewNumber, handleSubmit}) => {

@@ -4,10 +4,7 @@ const Input = ({name, value, onChange}) => {
     return (
         <div>
             {name} 
-            <input 
-            value={value}
-            onChange={onChange}
-            />
+            <input value={value} onChange={onChange}/>
         </div>
     )
 }
