@@ -1,9 +1,7 @@
 import React from 'react'
 
-const Country = ({countries}) => {
-    if (countries.length === 1) {
-        console.log(countries[0])
-        const country = countries[0]
+const Country = ({country}) => {
+        console.log(country)
 
         return (
             <div>
@@ -17,19 +15,9 @@ const Country = ({countries}) => {
                         return <li key={language.name}>{language.name}</li>
                     })}
                 </ul>
-                <img src={country.flag} width="250px"/>
+                <img src={country.flag} width="250px" alt="Flag of the country"/>
             </div>
         )
     }
-
-    return (
-        <div>
-        {Object.keys(countries).map(country => {
-            const name = countries[country].name
-            return <div key={name}>{name}</div>
-        })}
-       </div> 
-    )
-}
 
 export default Country

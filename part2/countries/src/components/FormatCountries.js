@@ -1,5 +1,5 @@
 import React from 'react'
-import Country from './Country'
+import Countries from './Countries'
 
 const FormatCountries = ({countries}) => {
     if (countries.length > 10){
@@ -7,7 +7,7 @@ const FormatCountries = ({countries}) => {
     }
 
     return (
-        <Country countries={countries}/>
+        <Countries countries={countries}/>
     )
 }
 
