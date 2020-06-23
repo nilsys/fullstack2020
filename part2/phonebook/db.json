@@ -1,16 +1,6 @@
 {
   "persons": [
     {
-      "name": "Arto Hellas",
-      "number": "!!\"#",
-      "id": 1
-    },
-    {
-      "name": "Ada Lovelace",
-      "number": "32453245",
-      "id": 2
-    },
-    {
       "name": "Dan Abramov",
       "number": "143251346134613461346",
       "id": 3
