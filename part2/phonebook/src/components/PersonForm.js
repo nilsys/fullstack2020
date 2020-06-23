@@ -4,8 +4,8 @@ import Input from './Input'
 const PersonForm = ({newName, handleNewName, newNumber, handleNewNumber, handleSubmit}) => {
     return (
         <form>
-            <Input name="name:" value={newName} onChange={handleNewName}/>
-            <Input name="number:" value={newNumber} onChange={handleNewNumber}/>
+            <Input name="Name:" value={newName} onChange={handleNewName}/>
+            <Input name="Number:" value={newNumber} onChange={handleNewNumber}/>
             <div>
                 <button type="submit" onClick={handleSubmit}>add</button>
             </div>

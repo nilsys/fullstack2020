@@ -3,6 +3,7 @@ import Persons from './components/Persons'
 import Input from './components/Input'
 import PersonForm from './components/PersonForm'
 import NumberService from './services/Numbers'
+import Notification from './components/Notification'
 
 
 const App = () => {
@@ -10,6 +11,7 @@ const App = () => {
     const [ newFilter, setNewFilter ] = useState('')
     const [ newName, setNewName ] = useState('')
     const [ newNumber, setNewNumber ] = useState('')
+    const [ message, setMessage ] = useState(null)
     const [ update, setUpdate] = useState(false)
 
     useEffect(() => {
@@ -40,6 +42,7 @@ const App = () => {
             if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
                 const person = persons.find(n => n.name === newName)
                 handleUpdateNumber(newNumber, person.id)
+                changeMessage(`Updated ${newName}'s number to ${newNumber}`)
             }
         } else {
             const newPerson = {"name": newName, "number": newNumber}
@@ -49,9 +52,9 @@ const App = () => {
                 setPersons(persons.concat(resp))
                 setNewName("")
                 setNewNumber("")
+                changeMessage(`Added ${newName}`)
             })
         }
-
     }
 
     const handleDelete = (name, id) => {
@@ -73,12 +76,19 @@ const App = () => {
         setUpdate(true)
     }
 
+    const changeMessage = (message) => {
+        setMessage(message)
+        setTimeout(() => {
+            setMessage(null)
+        }, 2500)
+    }
 
     return (
         <div>
+            <h2>Phonebook</h2>
+            <Notification message={message}/>
             <div>
-                <h2>Phonebook</h2>
-                <Input name="filter shown with" value={newFilter} onChange={handleNewFilter}/>
+                <Input name="Filter shown with" value={newFilter} onChange={handleNewFilter}/>
             </div>
 
             <h3>Add a new</h3>
