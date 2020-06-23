@@ -10,14 +10,16 @@ const App = () => {
     const [ newFilter, setNewFilter ] = useState('')
     const [ newName, setNewName ] = useState('')
     const [ newNumber, setNewNumber ] = useState('')
+    const [ update, setUpdate] = useState(false)
 
     useEffect(() => {
         NumberService
         .getNumbers()
         .then(resp => {
-            setPersons(resp.data)
+            setPersons(resp)
+            setUpdate(false)
         })
-    }, [])
+    }, [update])
 
     const handleNewName = (e) => {
         setNewName(e.target.value)
@@ -41,12 +43,19 @@ const App = () => {
             NumberService
             .create(newPerson)
             .then(resp => {
-                setPersons(persons.concat(resp.data))
+                setPersons(persons.concat(resp))
                 setNewName("")
                 setNewNumber("")
             })
         }
 
+    }
+
+    const handleDelete = (name, id) => {
+        if (window.confirm(`Delete ${name}?`)){
+            NumberService.deleteNumber(id)
+            setUpdate(true)
+        }
     }
 
 
@@ -64,7 +73,8 @@ const App = () => {
             handleSubmit={handleSubmit} />
 
             <h2>Numbers</h2>
-            <Persons persons={persons} filter={newFilter} />
+            <Persons persons={persons} filter={newFilter}
+            handleDelete={handleDelete} />
         </div>
     )
     }
