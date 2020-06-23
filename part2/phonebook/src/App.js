@@ -36,8 +36,11 @@ const App = () => {
     const handleSubmit = (event) => {
         event.preventDefault()
 
-        if (persons.some((person) => {return person.name === newName})) {
-            alert(`${newName} is already added to phonebook`)
+        if (persons.some((person) => {return (person.name === newName) })) {
+            if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
+                const person = persons.find(n => n.name === newName)
+                handleUpdateNumber(newNumber, person.id)
+            }
         } else {
             const newPerson = {"name": newName, "number": newNumber}
             NumberService
@@ -56,6 +59,18 @@ const App = () => {
             NumberService.deleteNumber(id)
             setUpdate(true)
         }
+    }
+
+    const handleUpdateNumber = (newNumber, id) => {
+        const person = persons.find(n => n.id === id)
+        person.number = newNumber
+        NumberService
+        .updateNumbers(person, id)
+        setNewName("")
+        setNewNumber("")
+        // This is pretty bubblegum but got dammit i dont know
+        // what else to do !!
+        setUpdate(true)
     }
 
 

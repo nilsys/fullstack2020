@@ -12,9 +12,14 @@ const create = (newNumber) => {
 }
 
 // bubblegum
-const deleteNumber = (numberToDelete) => {
-    const req =  axios.delete(`${baseUrl}/${numberToDelete}`, getNumbers)
+const deleteNumber = (id) => {
+    const req =  axios.delete(`${baseUrl}/${id}`)
     return req.then(resp => resp.data)
 }
 
-export default {getNumbers, create, deleteNumber}
+const updateNumbers = (newNumber, id) => {
+    const req = axios.put(`${baseUrl}/${id}`, newNumber)
+    return req.then(resp => resp)
+}
+
+export default {getNumbers, create, deleteNumber, updateNumbers}
