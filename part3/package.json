@@ -1,0 +1,35 @@
+{
+  "name": "part3",
+  "version": "1.0.0",
+  "description": "Fullstack Open MOOC part 3",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "lint": "eslint .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Borsas/fullstack2020_part3.git"
+  },
+  "author": "Borsas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Borsas/fullstack2020_part3/issues"
+  },
+  "homepage": "https://github.com/Borsas/fullstack2020_part3#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.20",
+    "mongoose-unique-validator": "^2.0.3",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.3.1",
+    "eslint-plugin-react": "^7.20.0",
+    "nodemon": "^2.0.4"
+  }
+}
