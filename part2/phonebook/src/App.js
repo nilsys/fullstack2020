@@ -43,7 +43,6 @@ const App = () => {
             if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
                 const person = persons.find(n => n.name === newName)
                 handleUpdateNumber(newNumber, person.id)
-                changeMessage(`Updated ${newName}'s number to ${newNumber}`, "success")
             }
         } else {
             const newPerson = {"name": newName, "number": newNumber}
@@ -54,6 +53,9 @@ const App = () => {
                 setNewName("")
                 setNewNumber("")
                 changeMessage(`Added ${newName}`, "success")
+            })
+            .catch(err => {
+                changeMessage(err.response.data.error.message, "error")
             })
         }
     }
@@ -80,6 +82,7 @@ const App = () => {
             // This is pretty bubblegum but got dammit i dont know
             // what else to do !!
             setUpdate(true)
+            changeMessage(`Updated ${newName}'s number to ${newNumber}`, "success")
         })
         .catch(() => {
             changeMessage(`Information of ${person.name} has already been removed from server`, "error")
