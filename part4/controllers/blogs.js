@@ -11,6 +11,12 @@ blogsRouter.get("/", async (request, response) => {
     if (!(blog.likes)) {
         blog.likes = 0
     }
+    if ((!blog.title) || !(blog.url)){
+        return await response.status(400).json({
+            error: "No title or url"
+        })
+    }
+    
     const result = await blog.save()
 
     return response.status(201).json(result)

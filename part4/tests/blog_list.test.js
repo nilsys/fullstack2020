@@ -53,7 +53,7 @@ test("Succesfully make a POST request", async () => {
     expect(end).toHaveLength(helper.initialBlogs.length + 1)
 })
 
-test("Verify if likes property missing from request", async () => {
+test("If likes property missing from request default to zero", async () => {
     const newBlog = {
         title: "A really cool blog",
         author: "Tester mcTester",
@@ -64,6 +64,17 @@ test("Verify if likes property missing from request", async () => {
         .send(newBlog)
         .expect(201)
     expect(resp.body.likes).toEqual(0)
+})
+
+test("Verify if title and url missing receive 400", async () => {
+    const newBlog = {
+        url: "https://test.com",
+        likes: 0
+    }
+    await api
+        .post("/api/blogs")
+        .send(newBlog)
+        .expect(400)
 })
 
 afterAll(() => {
