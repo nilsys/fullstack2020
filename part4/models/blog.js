@@ -8,8 +8,10 @@ const blogSchema = mongoose.Schema({
   likes: Number
 })
 
-
-const mongoUrl = config.MONGODB_URI
+let mongoUrl = config.MONGODB_URI
+if (process.env.NODE_ENV === "test"){
+  mongoUrl = config.MONGODB_TEST_URI
+}
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 
 module.exports = mongoose.model("Blog", blogSchema)
