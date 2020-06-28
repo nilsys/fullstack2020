@@ -53,6 +53,19 @@ test("Succesfully make a POST request", async () => {
     expect(end).toHaveLength(helper.initialBlogs.length + 1)
 })
 
+test("Verify if likes property missing from request", async () => {
+    const newBlog = {
+        title: "A really cool blog",
+        author: "Tester mcTester",
+        url: "https://test.com"
+    }
+    const resp = await api
+        .post("/api/blogs")
+        .send(newBlog)
+        .expect(201)
+    expect(resp.body.likes).toEqual(0)
+})
+
 afterAll(() => {
     mongoose.connection.close()
 })
