@@ -77,6 +77,16 @@ test("Verify if title and url missing receive 400", async () => {
         .expect(400)
 })
 
+test("Deleting blog succesfully", async () => {
+    const id = await helper.idFromDb()
+
+    await api
+        .delete("/api/blogs/" + id)
+        expect(204)
+    const end = await helper.blogsInDb()
+    expect(end).toHaveLength(helper.initialBlogs.length - 1)
+})
+
 afterAll(() => {
     mongoose.connection.close()
 })
