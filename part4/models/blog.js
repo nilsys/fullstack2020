@@ -8,10 +8,16 @@ const blogSchema = mongoose.Schema({
   likes: Number
 })
 
+blogSchema.set('toJSON', {
+    transform: (document, returnedObject) => {
+      returnedObject.id = returnedObject._id.toString()
+      delete returnedObject._id
+      delete returnedObject.__v
+  }
+})
+
 let mongoUrl = config.MONGODB_URI
-if (process.env.NODE_ENV === "test"){
-  mongoUrl = config.MONGODB_TEST_URI
-}
+
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 
 module.exports = mongoose.model("Blog", blogSchema)
