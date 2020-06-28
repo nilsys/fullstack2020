@@ -87,6 +87,18 @@ test("Deleting blog succesfully", async () => {
     expect(end).toHaveLength(helper.initialBlogs.length - 1)
 })
 
+test("Update existing likes succesfully", async () => {
+    const id = await helper.idFromDb()
+
+    const newLikes = { likes: 1000}
+
+    const result = await api
+        .put("/api/blogs/" + id)
+        .send(newLikes)
+        .expect(200)
+    expect(result.body.likes).toEqual(newLikes.likes)
+})
+
 afterAll(() => {
     mongoose.connection.close()
 })
