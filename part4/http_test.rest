@@ -1,9 +1,0 @@
-POST http://localhost:3003/api/blogs
-content-type: application/json
-
-{
-    "title": "Story of authorization",
-    "author": "Borsas",
-    "url": "https://google.com",
-    "likes": 1337
-}

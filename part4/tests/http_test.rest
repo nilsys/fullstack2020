@@ -1,0 +1,10 @@
+DELETE http://localhost:3003/api/blogs/5efa3ff3fb2fe95e5bd2b898
+content-type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJvcnNhcyIsImlkIjoiNWVmYTJmMzFiYjQ0ZjAzOGQxZDBhOWQ2IiwiaWF0IjoxNTkzNDU2MTY5fQ.gRGfz4A9mzBsPyYYidh78Qbw46V3iPJuXyIYn6piyZc
+
+{
+    "title": "Great story mon",
+    "author": "Borsas",
+    "url": "https://google.com",
+    "likes": 111
+}
