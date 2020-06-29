@@ -1,10 +1,7 @@
-POST http://localhost:3003/api/blogs
+POST http://localhost:3003/api/login
 content-type: application/json
 
 {
-    "title": "324213234",
-    "author": "Oskari",
-    "url": "rorrrrrrrr",
-    "likes": 0,
-    "userId": "5efa2f31bb44f038d1d0a9d6"
+    "username": "borsas",
+    "password": "1234565677"
 }
