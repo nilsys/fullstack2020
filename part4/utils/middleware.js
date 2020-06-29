@@ -7,6 +7,8 @@ const handleErrors = (error, req, resp, next) => {
         return resp.status(400).json({ error: error })
     } else if (error.name === "MongoError") {
         return resp.status(400).send({ error: error })
+    }else if (error.name === "TypeError") {
+        return resp.status(400).send({ error: error })
     }
     next(error)
 }
