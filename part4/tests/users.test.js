@@ -8,24 +8,21 @@ const api = supertest(app)
 describe("User related tests", () => {
     beforeEach( async () => {
         await User.deleteMany({})
-        console.log("Deleted everything")
     
-        let userObject = new User(helper.initialUsers[0])
-        await userObject.save()
-    
-        userObject = new User(helper.initialUsers[1])
-        await userObject.save()
+        await api.post("/api/users").send(helper.initialUsers[0])
+        await api.post("/api/users").send(helper.initialUsers[1])
+
     })
 
     test("Non-unique user is not created", async () => {
-        const newUser = {
+        const newUser1 = {
             username: "admin",
             name: "admin",
             password: "admin"
         }
         await api
             .post("/api/users")
-            .send(newUser)
+            .send(newUser1)
             .expect(400)
             .expect('Content-Type', /application\/json/)
         const end = await helper.usersInDb()
@@ -33,14 +30,14 @@ describe("User related tests", () => {
     })
 
     test("User created succesfully", async () => {
-        const newUser = {
+        const newUser2 = {
             username: "Woohooo",
             name: "Pallo",
             password: "goodstuff"
         }
         await api
             .post("/api/users")
-            .send(newUser)
+            .send(newUser2)
             .expect(200)
             .expect('Content-Type', /application\/json/)
         const end = await helper.usersInDb()
@@ -48,14 +45,14 @@ describe("User related tests", () => {
     })
 
     test("User with bad username is not created", async () => {
-        const newUser = {
+        const newUser3 = {
             username: "Bo",
             name: "Oskari",
             password: "goodstuff"
         }
         await api
             .post("/api/users")
-            .send(newUser)
+            .send(newUser3)
             .expect(400)
             .expect('Content-Type', /application\/json/)
         const end = await helper.usersInDb()
@@ -63,14 +60,14 @@ describe("User related tests", () => {
     })
 
     test("User with bad password is not created", async () => {
-        const newUser = {
-            username: "Borsas",
-            name: "Oskari",
-            password: "12"
+        const newUser4 = {
+            username: "1234568",
+            name: "1234568",
+            password: "a"
         }
         const resp = await api
             .post("/api/users")
-            .send(newUser)
+            .send(newUser4)
             .expect(400)
             .expect('Content-Type', /application\/json/)
         const end = await helper.usersInDb()
@@ -79,10 +76,10 @@ describe("User related tests", () => {
     })
 
     test("User with bad data is not created", async () => {
-        const newUser = {}
+        const newUser5 = {}
         const resp = await api
             .post("/api/users")
-            .send(newUser)
+            .send(newUser5)
             .expect(401)
             .expect('Content-Type', /application\/json/)
         const end = await helper.usersInDb()

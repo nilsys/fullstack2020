@@ -6,13 +6,15 @@ const initialBlogs = [
         title: "HTML is easy",
         author: "Steve jobs",
         url: "https://google.com",
-        likes: 1
+        likes: 1,
+        user: "5efa508c81ce507bc705857a"
     },
     {
         title: "Browser can execute only Javascript",
         author: "Mark Zucc",
         url: "https://facebook.com",
-        likes: 10
+        likes: 10,
+        user: "5efa508c81ce507bc705857a"
     },
 ]
 
@@ -28,6 +30,7 @@ const initialUsers = [
         password: "totally_not_admin"
     }
 ]
+
 
 const blogsInDb = async () => {
     const blogs = await Blog.find({})

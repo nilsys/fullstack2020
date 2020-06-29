@@ -15,12 +15,12 @@ usersRouter.get("/", async (req, resp) => {
 usersRouter.post("/", async (req, resp) => {
     const body = req.body
     if (!(body.password && body.username)){
-        resp.status(401).json({
+        return resp.status(401).json({
             error: "Invalid username or password"
         })
     }
     if (body.password.length < 3) {
-        resp.status(400).json({
+        return resp.status(400).json({
             error: "Password must be atleast 3 characters long."
         })
     }
@@ -34,7 +34,7 @@ usersRouter.post("/", async (req, resp) => {
     })
 
     const savedUser = await user.save()
-    resp.json(savedUser)
+    return resp.json(savedUser)
 })
 
 module.exports = usersRouter

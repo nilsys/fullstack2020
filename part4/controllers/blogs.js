@@ -11,12 +11,13 @@ blogsRouter.get("/", async (request, response) => {
   
 blogsRouter.post("/", async (request, response) => {
     const body = request.body
-    const decodedToken = jwt.verify(request.token, process.env.SECRET_HASH)
+    const decodedToken = jwt.verify(request.token, process.env.SECRET_HASH) 
     if (!(request.token || !decodedToken)){
         return response.status(401).json({
             error: "Invalid or missing token"
         })
     }
+
 
     const user = await User.findById(decodedToken.id)
 
@@ -56,13 +57,13 @@ blogsRouter.delete("/:id", async (req, resp) => {
     }
     const blog = await Blog.findById(blogId)
     if (!blog){
-        resp.status(404).json({
+        return resp.status(404).json({
             error: "Blog doesn't exist"
         })
     }
 
     if (!(blog.user.toString() === decodedToken.id)){
-        resp.status(400).json({
+        return resp.status(400).json({
             error: "User does not own this blog"
         })
     }
