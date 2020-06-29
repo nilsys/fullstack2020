@@ -4,9 +4,9 @@ const Blog = require("../models/blog")
 blogsRouter.get("/", async (request, response) => {
     const blogs = await Blog.find({})
     return response.json(blogs)
-  })
+})
   
-  blogsRouter.post("/", async (request, response) => {
+blogsRouter.post("/", async (request, response) => {
     const blog = new Blog(request.body)
         if (!(blog.likes)) {
             blog.likes = 0
@@ -21,14 +21,14 @@ blogsRouter.get("/", async (request, response) => {
     const result = await blog.save()
 
     return response.status(201).json(result)
-  })
+})
 
-  blogsRouter.delete("/:id", async (req, resp) => {
+blogsRouter.delete("/:id", async (req, resp) => {
     await Blog.findByIdAndDelete(req.params.id)
     return resp.status(204).end()
-  })
+})
 
-  blogsRouter.put("/:id", async (req, resp) => {
+blogsRouter.put("/:id", async (req, resp) => {
     const id = req.params.id
     const body = req.body
 
@@ -41,7 +41,7 @@ blogsRouter.get("/", async (request, response) => {
     } else {
         resp.status(400).end()
     }
-    
-  })
 
-  module.exports = blogsRouter
+})
+
+module.exports = blogsRouter

@@ -1,9 +1,8 @@
-POST http://localhost:3003/api/blogs
+GET http://localhost:3003/api/users
 content-type: application/json
 
 {
-    "title": "Toinen",
-    "author": "Author",
-     "url": "google.com",
-     "likes": 1337
+    "username": "Borsas",
+    "name": "Oskari",
+    "password": "salasana"
 }
