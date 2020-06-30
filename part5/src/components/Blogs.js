@@ -1,7 +1,8 @@
 import React from 'react'
 import Blog from "./Blog"
+import CreateBlog from "./CreateBlog"
 
-const Blogs = ({ user, blogs, setUser }) => {
+const Blogs = ({ user, setUser, blogs, setBlogs }) => {
 
     const logout = () => {
         window.localStorage.removeItem("loggedInUser")
@@ -15,10 +16,12 @@ const Blogs = ({ user, blogs, setUser }) => {
                 {user.name} logged in
                 <button onClick={() => logout()}>Logout</button>
             </div>
-            {blogs.map((blog) => {
-                return <Blog key={blog.title} blog={blog} user={user}/>
-
-            })}
+            <CreateBlog blogs={blogs} setBlogs={setBlogs} user={user}/>
+            <div>
+                {blogs.map((blog) => {
+                    return <Blog key={blog.id} blog={blog} user={user}/>
+                })}
+            </div>
         </div>
     )
 }

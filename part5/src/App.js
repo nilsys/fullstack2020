@@ -11,6 +11,7 @@ const App = () => {
     const [ password, setPassword ] = useState("")
 
     useEffect(() => {
+        console.log("Loaded blogs")
         blogService.getAll().then(blogs =>
         setBlogs(blogs)
         )  
@@ -21,6 +22,7 @@ const App = () => {
         if (getUserInfo) {
             const user = JSON.parse(getUserInfo)
             setUser(user)
+            blogService.setToken(user.token)
         }
     }, [])
 
@@ -36,6 +38,7 @@ const App = () => {
                 "loggedInUser", JSON.stringify(loginDetails)
             )
             setUser(loginDetails)
+            blogService.setToken(loginDetails.token)
             setPassword("")
             setUsername("")
         } catch (err){
@@ -51,7 +54,7 @@ const App = () => {
             setUsername={setUsername} setPassword={setPassword}
             handleLogin={handleLogin} />
             : 
-            <Blogs user={user} blogs={blogs} setUser={setUser}/>}   
+            <Blogs user={user} setUser={setUser} blogs={blogs} setBlogs={setBlogs} />}   
         </div>
     )
 }
