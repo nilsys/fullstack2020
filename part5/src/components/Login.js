@@ -1,17 +1,19 @@
 import React from 'react'
+import Notification from "./Notification"
 
-const Login = ({username, setUsername, password, setPassword, handleLogin}) => {
+const Login = (props) => {
     return (
         <div>
             <h2>Log in to application</h2>
-            <form onSubmit={handleLogin}>
+            <Notification message={props.message} type={props.messageType}/>
+            <form onSubmit={props.handleLogin}>
                 <div>
                     Username: 
-                    <input value={username} onChange={({target}) => setUsername(target.value)}/>
+                    <input value={props.username} onChange={({target}) => props.setUsername(target.value)}/>
                 </div>
                 <div>
                     Password: 
-                    <input type="password" value={password} onChange={({target}) => setPassword(target.value)}/>
+                    <input type="password" value={props.password} onChange={({target}) => props.setPassword(target.value)}/>
                 </div>
                 <button type="submit">Login</button>
             </form>

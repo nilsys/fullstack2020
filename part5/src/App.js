@@ -9,6 +9,8 @@ const App = () => {
     const [ user, setUser ] = useState(null)
     const [ username, setUsername ] = useState("")
     const [ password, setPassword ] = useState("")
+    const [ message, setMessage ] = useState(null)
+    const [ messageType, setMessageType] = useState("success")
 
     useEffect(() => {
         console.log("Loaded blogs")
@@ -29,7 +31,6 @@ const App = () => {
     const handleLogin = async (e) => {
         e.preventDefault()
         try {
-            
             const loginDetails = await blogService.login({
                 "username": username,
                 "password": password
@@ -42,9 +43,16 @@ const App = () => {
             setPassword("")
             setUsername("")
         } catch (err){
-            console.log('ERROR LOGGING', err)
+            changeMessage("Wrong username or password", "error")
         }
+    }
 
+    const changeMessage = (message, messageType) => {
+        setMessage(message)
+        setMessageType(messageType)
+        setTimeout(() => {
+            setMessage(null)
+        }, 2500)
     }
 
     return (
@@ -52,9 +60,13 @@ const App = () => {
             {user === null ? 
             <Login username={username} password={password}
             setUsername={setUsername} setPassword={setPassword}
-            handleLogin={handleLogin} />
+            handleLogin={handleLogin} 
+            message={message} messageType={messageType}/>
             : 
-            <Blogs user={user} setUser={setUser} blogs={blogs} setBlogs={setBlogs} />}   
+            <Blogs user={user} setUser={setUser}
+            blogs={blogs} setBlogs={setBlogs}
+            changeMessage={changeMessage}
+            message={message} messageType={messageType}/>}   
         </div>
     )
 }
