@@ -1,15 +1,11 @@
 import React from 'react'
 
-const Blog = ({blog, user}) => {
-
-    if (blog.user.username === user.username) {
-        return (
-        <div>
-            {blog.title} {blog.author}
-        </div>
-        )
-    } 
-    return null
+const Blog = ({blog}) => {
+    return (
+    <div>
+        {blog.title} {blog.author}
+    </div>
+    )
 }
 
 export default Blog
