@@ -33,7 +33,9 @@ const Blogs = ({ user, setUser, blogs, setBlogs, changeMessage, message, message
              user={user} changeMessage={changeMessage}
              message={message} messageType={messageType} />
             <div>
-                {blogs.map((blog) => {
+                {blogs.sort((a, b) => {
+                    return b.likes - a.likes
+                }).map((blog) => {
                     return <Blog key={blog.id} blog={blog} handleNewLike={handleNewLike} />
                 })}
             </div>
