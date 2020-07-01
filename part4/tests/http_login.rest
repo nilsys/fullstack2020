@@ -1,10 +1,8 @@
-POST http://localhost:3003/api/login/
-content-type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOiI1ZWZhNDA2MGZiMmZlOTVlNWJkMmI4OTkiLCJpYXQiOjE1OTM0NTg4MTR9.4zZ4okozWaVl1MfXr6QVcwJbXMp9XsUEk8X3xV6Tl-A
+POST http://localhost:3001/api/users/
+Content-Type: application/json
 
 {
-    "title": "Admin",
-    "author": "admin",
-    "url": "https://admin.com",
-    "likes": 1234
+    "username": "admin",
+    "password": "admin",
+    "name": "Borsas"
 }
