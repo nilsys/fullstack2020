@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import "../index.css"
 
-const Blog = ({blog}) => {
+const Blog = ({blog, handleNewLike}) => {
     const [ showBlog, setShowBlog] = useState(false)
     const [ buttonText, setButtonText ] = useState("view")
 
@@ -9,8 +9,9 @@ const Blog = ({blog}) => {
 
     const handleShowBlog = () => {
         setShowBlog(!showBlog)
-        setButtonText(buttonText === "view" ? "cancel" : "view")
+        setButtonText(buttonText === "view" ? "hide" : "view")
     }
+
 
     return (
         <div className={"blogStyle"}>
@@ -23,7 +24,7 @@ const Blog = ({blog}) => {
                 </div>
                 <div>
                     {blog.likes}
-                    <button>Like</button>
+                    <button type="button" onClick={() => handleNewLike(blog.id)}>Like</button>
                 </div>
                 <div>
                     {blog.author}
