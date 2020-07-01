@@ -5,7 +5,7 @@ const Blog = ({ blog, user, handleNewLike, handleBlogDelete }) => {
     const [ showBlog, setShowBlog] = useState(false)
     const [ buttonText, setButtonText ] = useState("view")
 
-    const visibility = { display: showBlog ? " " : "none" }
+    const visibility = { display: showBlog ? " " : "none"}
     const showDelete = { display: user.username === blog.user.username ? " " : "none" }
 
     const handleShowBlog = () => {
@@ -17,9 +17,9 @@ const Blog = ({ blog, user, handleNewLike, handleBlogDelete }) => {
     return (
         <div className={"blogStyle"}>
             <div>
-                {blog.title} <button onClick={handleShowBlog}>{buttonText}</button>
+                {blog.title} {blog.author} <button onClick={handleShowBlog}>{buttonText}</button>
             </div>
-            <div style={visibility}>
+            <div className={"blogDetails"} style={visibility}>
                 <div>
                     {blog.url}
                 </div>

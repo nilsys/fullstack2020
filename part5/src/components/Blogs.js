@@ -32,6 +32,24 @@ const Blogs = ({ user, setUser, blogs, setBlogs, changeMessage, message, message
         }
     }
 
+    const createNewBlog = async blogObject => {
+        try {
+            let resp = await blogService.newBlog(blogObject)
+            resp.user = {
+                "id": resp.user,
+                "username": user.username,
+                "name": user.name
+                }
+            setBlogs(blogs.concat(resp))
+            changeMessage(`A new blog ${resp.title} by ${resp.author} added`, "success")
+            console.log(`Created a new blog with id ${resp.id}`)
+            return true
+        } catch {
+            changeMessage(`Invalid blog data`, "error")
+            return false
+        }
+    }
+
     return (
         <div>
             <h2>Blogs</h2>
@@ -39,9 +57,7 @@ const Blogs = ({ user, setUser, blogs, setBlogs, changeMessage, message, message
                 {user.name} logged in
                 <button onClick={() => logout()}>Logout</button>
             </div>
-            <CreateBlog blogs={blogs} setBlogs={setBlogs}
-                user={user} changeMessage={changeMessage}
-                message={message} messageType={messageType} />
+            <CreateBlog createNewBlog={createNewBlog} message={message} messageType={messageType} />
             <div>
                 {blogs.sort((a, b) => {
                     return b.likes - a.likes
