@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState } from "react"
 import "../index.css"
 
-const Blog = ({blog, user, handleNewLike, handleBlogDelete}) => {
+const Blog = ({ blog, user, handleNewLike, handleBlogDelete }) => {
     const [ showBlog, setShowBlog] = useState(false)
     const [ buttonText, setButtonText ] = useState("view")
 
-    const visibility = {display: showBlog ? " " : "none"}
-    const showDelete = {display: user.username === blog.user.username ? " " : "none"}
+    const visibility = { display: showBlog ? " " : "none" }
+    const showDelete = { display: user.username === blog.user.username ? " " : "none" }
 
     const handleShowBlog = () => {
         setShowBlog(!showBlog)

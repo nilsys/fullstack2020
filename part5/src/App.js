@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
-import Blogs from './components/Blogs'
+import React, { useState, useEffect } from "react"
+import Blogs from "./components/Blogs"
 import Login from "./components/Login"
-import blogService from './services/blogs'
+import blogService from "./services/blogs"
 
 
 const App = () => {
@@ -12,10 +12,13 @@ const App = () => {
     const [ message, setMessage ] = useState(null)
     const [ messageType, setMessageType] = useState("success")
 
-    useEffect(async () => {
-        console.log("Loaded blogs")
-         const blogs = await blogService.getAll()
-         setBlogs(blogs)
+    useEffect(() => {
+        const fetch = async () => {
+            console.log("Loaded blogs")
+            const blogs = await blogService.getAll()
+            setBlogs(blogs)
+        }
+        fetch()
     }, [])
 
     useEffect(() => {
@@ -56,16 +59,16 @@ const App = () => {
 
     return (
         <div>
-            {user === null ? 
-            <Login username={username} password={password}
-            setUsername={setUsername} setPassword={setPassword}
-            handleLogin={handleLogin} 
-            message={message} messageType={messageType}/>
-            : 
-            <Blogs user={user} setUser={setUser}
-            blogs={blogs} setBlogs={setBlogs}
-            changeMessage={changeMessage}
-            message={message} messageType={messageType}/>}   
+            {user === null ?
+                <Login username={username} password={password}
+                    setUsername={setUsername} setPassword={setPassword}
+                    handleLogin={handleLogin}
+                    message={message} messageType={messageType}/>
+                :
+                <Blogs user={user} setUser={setUser}
+                    blogs={blogs} setBlogs={setBlogs}
+                    changeMessage={changeMessage}
+                    message={message} messageType={messageType}/>}
         </div>
     )
 }

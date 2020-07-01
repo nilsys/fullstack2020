@@ -1,15 +1,15 @@
-import React from 'react'
-import '../index.css'
+import React from "react"
+import "../index.css"
 
-const Notification = ({message, type}) => {
+const Notification = ({ message, type }) => {
     if (message === null){
         return null
     }
 
     return (
-    <div className={type}>
-        {message}
-    </div>
+        <div className={type}>
+            {message}
+        </div>
     )
 }
 

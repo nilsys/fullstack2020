@@ -1,7 +1,11 @@
 import React, { useState } from "react"
+import PropTypes from "prop-types"
 
-// From part5 
+// From part5
 const Togglable = (props) => {
+    Togglable.propTypes = {
+        buttonLabel: PropTypes.string.isRequired
+    }
     const [visible, setVisible] = useState(false)
 
     const hideWhenVisible = { display: visible ? "none" : "" }

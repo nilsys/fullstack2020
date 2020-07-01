@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react"
 import Blog from "./Blog"
 import CreateBlog from "./CreateBlog"
 import blogService from "../services/blogs"
@@ -40,14 +40,14 @@ const Blogs = ({ user, setUser, blogs, setBlogs, changeMessage, message, message
                 <button onClick={() => logout()}>Logout</button>
             </div>
             <CreateBlog blogs={blogs} setBlogs={setBlogs}
-             user={user} changeMessage={changeMessage}
-             message={message} messageType={messageType} />
+                user={user} changeMessage={changeMessage}
+                message={message} messageType={messageType} />
             <div>
                 {blogs.sort((a, b) => {
                     return b.likes - a.likes
                 }).map((blog) => {
                     return <Blog key={blog.id} blog={blog} user={user}
-                    handleNewLike={handleNewLike} handleBlogDelete={handleBlogDelete} />
+                        handleNewLike={handleNewLike} handleBlogDelete={handleBlogDelete} />
                 })}
             </div>
         </div>
