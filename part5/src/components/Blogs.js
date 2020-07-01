@@ -22,6 +22,16 @@ const Blogs = ({ user, setUser, blogs, setBlogs, changeMessage, message, message
         await blogService.updateLikes(blogObject)
     }
 
+    const handleBlogDelete = async (deleteBlog) => {
+        const confirmation = `Remove blog ${deleteBlog.name} by ${deleteBlog.author}?`
+
+        if (window.confirm(confirmation)) {
+            setBlogs(blogs.filter(blog => blog.id !== deleteBlog.id))
+            await blogService.deleteBlog(deleteBlog.id)
+            console.log(`Deleted blog ${deleteBlog.id}`)
+        }
+    }
+
     return (
         <div>
             <h2>Blogs</h2>
@@ -36,7 +46,8 @@ const Blogs = ({ user, setUser, blogs, setBlogs, changeMessage, message, message
                 {blogs.sort((a, b) => {
                     return b.likes - a.likes
                 }).map((blog) => {
-                    return <Blog key={blog.id} blog={blog} handleNewLike={handleNewLike} />
+                    return <Blog key={blog.id} blog={blog} user={user}
+                    handleNewLike={handleNewLike} handleBlogDelete={handleBlogDelete} />
                 })}
             </div>
         </div>

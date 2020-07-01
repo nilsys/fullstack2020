@@ -12,11 +12,10 @@ const App = () => {
     const [ message, setMessage ] = useState(null)
     const [ messageType, setMessageType] = useState("success")
 
-    useEffect(() => {
+    useEffect(async () => {
         console.log("Loaded blogs")
-        blogService.getAll().then(blogs =>
-        setBlogs(blogs)
-        )  
+         const blogs = await blogService.getAll()
+         setBlogs(blogs)
     }, [])
 
     useEffect(() => {

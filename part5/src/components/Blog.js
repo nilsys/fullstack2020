@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import "../index.css"
 
-const Blog = ({blog, handleNewLike}) => {
+const Blog = ({blog, user, handleNewLike, handleBlogDelete}) => {
     const [ showBlog, setShowBlog] = useState(false)
     const [ buttonText, setButtonText ] = useState("view")
 
     const visibility = {display: showBlog ? " " : "none"}
+    const showDelete = {display: user.username === blog.user.username ? " " : "none"}
 
     const handleShowBlog = () => {
         setShowBlog(!showBlog)
@@ -28,6 +29,9 @@ const Blog = ({blog, handleNewLike}) => {
                 </div>
                 <div>
                     {blog.author}
+                </div>
+                <div style={showDelete}>
+                    <button onClick={() => handleBlogDelete(blog)} type="button">Delete</button>
                 </div>
             </div>
         </div>
