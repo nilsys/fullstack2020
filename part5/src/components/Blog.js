@@ -17,17 +17,17 @@ const Blog = ({ blog, user, handleNewLike, handleBlogDelete }) => {
     return (
         <div className={"blogStyle"}>
             <div>
-                {blog.title} {blog.author} <button onClick={handleShowBlog}>{buttonText}</button>
+                {blog.title} {blog.author} <button className={"hideButton"} onClick={handleShowBlog}>{buttonText}</button>
             </div>
             <div className={"blogDetails"} style={visibility}>
-                <div>
+                <div className={"url"}>
                     {blog.url}
                 </div>
-                <div>
+                <div className={"likes"}>
                     {blog.likes}
                     <button type="button" onClick={() => handleNewLike(blog.id)}>Like</button>
                 </div>
-                <div>
+                <div className={"Author"}>
                     {blog.author}
                 </div>
                 <div style={showDelete}>
