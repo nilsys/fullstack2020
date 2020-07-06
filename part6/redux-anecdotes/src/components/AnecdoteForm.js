@@ -1,16 +1,14 @@
 import React from "react"
-import { useDispatch } from 'react-redux'
-import { createAnecdote } from "../reducers/anecdoteReducer"
 
-const AnecdoteForm = () => {
-    const dispatch = useDispatch()
-    
+const AnecdoteForm = ({changeMessage}) => {
+
     const newAnecdote = (e) => {
         e.preventDefault()
         const text = e.target.newAnecdote.value
         e.target.newAnecdote.value = ""
-        dispatch(createAnecdote(text))
+        changeMessage(`You created "${text}"`)
     }
+
 
     return (
         <div>
