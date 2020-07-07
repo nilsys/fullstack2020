@@ -16,4 +16,10 @@ const addNew = async (anecdote) => {
     return resp.data
 }
 
-export default { getAll, addNew }
+const upvote = async (object) => {
+    const resp = await axios.put(`${host}/${object.id}`, object)
+    console.log(await resp.data)
+    return resp.data
+}
+
+export default { getAll, addNew, upvote }

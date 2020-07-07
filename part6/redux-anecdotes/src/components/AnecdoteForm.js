@@ -1,7 +1,6 @@
 import React from "react"
 import { useDispatch } from 'react-redux'
 import { createAnecdote } from "../reducers/anecdoteReducer"
-import anecdoteServer from "../services/anecdoteServer"
 
 const AnecdoteForm = ({changeMessage}) => {
 
@@ -12,8 +11,7 @@ const AnecdoteForm = ({changeMessage}) => {
         const text = e.target.newAnecdote.value
         e.target.newAnecdote.value = ""
         changeMessage(`You created "${text}"`)
-        const anecdote = await anecdoteServer.addNew(text)
-        dispatch(createAnecdote(anecdote))
+        dispatch(createAnecdote(text))
     }
 
     return (

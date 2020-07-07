@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addAllAnecdotes } from "./reducers/anecdoteReducer"
 import {changeNotification, showNotification} from "./reducers/notificationReducer"
 
-import anecdoteServer from "./services/anecdoteServer"
 
 const App = () => {
     const dispatch = useDispatch()
@@ -25,9 +24,7 @@ const App = () => {
     }
 
     useEffect(() => {
-        anecdoteServer.getAll().then((resp) => {
-            dispatch(addAllAnecdotes(resp))
-        })
+        dispatch(addAllAnecdotes())
     }, [dispatch])
 
     return (
