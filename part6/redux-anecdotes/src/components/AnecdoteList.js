@@ -5,6 +5,7 @@ import { voteAnecdote } from "../reducers/anecdoteReducer"
 
 const AnecdoteList = ({changeMessage}) => {
     const anecdotes = useSelector(state => state.anecdotes)
+    const filter = useSelector(state => state.filter.msg)
     const dispatch = useDispatch()
 
     const vote = (anecdote) => {
@@ -15,6 +16,7 @@ const AnecdoteList = ({changeMessage}) => {
     return (
         <div>
             {anecdotes.sort((a, b) => b.votes - a.votes)
+            .filter(anecdote => anecdote.content.includes(filter))
             .map(anecdote =>
                 <div key={anecdote.id}>
                     <div>
