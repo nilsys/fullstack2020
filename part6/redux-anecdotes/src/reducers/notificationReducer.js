@@ -3,29 +3,34 @@ const initialState = {
     hidden: true
 }
 
-export const changeNotification = (msg) => {
-    return {
-        type: "NEW_MESSAGE",
-        data: {
-            msg
-        }
+const wait = async (time) => {
+    return new Promise(resolve => {
+        setTimeout(resolve, time * 1000)
+    })
+}
+
+export const changeNotification = (msg, timeout) => {
+    return async dispatch => {
+        await dispatch({
+            type: "NEW_MESSAGE",
+            data: { msg }
+        })
+        await wait(timeout)
+        await dispatch({
+            type: "HIDE_NOTIFICATION"
+        })
     }
 }
 
-export const showNotification = () => {
-    return {
-        type: "SHOW_NOTIFICATION"
-    }
-}
 
 const notificationReducer = (state = initialState, action) => {
     switch(action.type) {
         case "GET_MESSAGE":
             return state
         case "NEW_MESSAGE":
-            return {...state, msg: action.data.msg}
-        case "SHOW_NOTIFICATION":
-            return {...state, hidden: !state.hidden}
+            return {...state, msg: action.data.msg, hidden: false}
+        case "HIDE_NOTIFICATION":
+            return {...state, hidden: true}
         default:
             return state
     }

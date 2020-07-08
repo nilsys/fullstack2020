@@ -2,14 +2,14 @@ import anecdoteServer from "../services/anecdoteServer"
 
 export const voteAnecdote = (object) => {
     return async dispatch => {
-        object.votes = object.votes + 1
-        await anecdoteServer.upvote(object)
         dispatch({
             type: "VOTE_ANECDOTE",
             data: {
                 id: object.id
             }
         })
+        object.votes = object.votes + 1
+        await anecdoteServer.upvote(object)
     }
 }
 

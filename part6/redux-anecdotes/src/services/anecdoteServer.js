@@ -18,7 +18,6 @@ const addNew = async (anecdote) => {
 
 const upvote = async (object) => {
     const resp = await axios.put(`${host}/${object.id}`, object)
-    console.log(await resp.data)
     return resp.data
 }
 
