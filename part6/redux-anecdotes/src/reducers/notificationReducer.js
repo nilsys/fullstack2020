@@ -5,9 +5,12 @@ const initialState = {
 
 const wait = async (time) => {
     return new Promise(resolve => {
-        setTimeout(resolve, time * 1000)
+        timeoutHandle = setTimeout(resolve, time * 1000)
+        notifications.push(timeoutHandle)
     })
 }
+let timeoutHandle
+let notifications = []
 
 export const changeNotification = (msg, timeout) => {
     return async dispatch => {
@@ -15,18 +18,28 @@ export const changeNotification = (msg, timeout) => {
             type: "NEW_MESSAGE",
             data: { msg }
         })
-        await wait(timeout)
+
+        const promise = wait(timeout)
+
+        if (notifications.length > 1) {
+            for(let i = 0; i < notifications.length - 1; i++){
+                //console.log("Notification exists, deleting notification with id", notifications[i])
+                clearTimeout(notifications[i])
+                notifications.splice(i, 1)
+
+            }
+        }
+        await promise
         await dispatch({
             type: "HIDE_NOTIFICATION"
         })
+        notifications.pop()
     }
 }
 
 
 const notificationReducer = (state = initialState, action) => {
     switch(action.type) {
-        case "GET_MESSAGE":
-            return state
         case "NEW_MESSAGE":
             return {...state, msg: action.data.msg, hidden: false}
         case "HIDE_NOTIFICATION":
