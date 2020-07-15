@@ -19,26 +19,34 @@ const CreateNew = (props) => {
             info: info.value,
             votes: 0
         })
-  }
+    }
+    // ??? :D
+    const handleReset = (e) => {
+        e.preventDefault()
+        content.onReset()
+        author.onReset()
+        info.onReset()
+    }
 
     return (
         <div>
             {redirect ? <Redirect to="/"/> : null} 
-            <h2>create a new anecdote</h2>
-            <form onSubmit={handleSubmit}>
+            <h2>Create a new anecdote.</h2>
+            <form onSubmit={handleSubmit} onReset={handleReset}>
                 <div>
-                    content
+                    Content
                     <input {...content} />
                 </div>
                 <div>
-                    author
+                    Author
                     <input {...author} />
                 </div>
                     <div>
-                    url for more info
+                    Url for more info
                     <input {...info} />
                 </div>
-                <button>create</button>
+                <input type="submit" value="Create"/>
+                <input type="reset" value="Reset"/>
             </form>
         </div>
         )
