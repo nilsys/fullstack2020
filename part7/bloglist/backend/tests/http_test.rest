@@ -1,0 +1,10 @@
+POST http://localhost:3001/api/blogs/
+content-type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOiI1ZWZhNDA2MGZiMmZlOTVlNWJkMmI4OTkiLCJpYXQiOjE1OTM1NDAzMzd9.MLs1A6VuqnY_J-j6NadU1c3K5u_HffbSZrYktMoBfkg
+
+{
+    "title": "SKRRRRRRRRRRRRRRRRRT",
+    "author": "admin",
+    "url": "https://admin.com",
+    "likes": 69
+}
