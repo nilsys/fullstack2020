@@ -4,7 +4,7 @@ export const setUser = (user) => {
     return async dispatch => {
         if (user !== null){
             await blogService.setToken(user.token)
-        }
+        } 
         dispatch({
             type: "SET_USER",
             data: user
@@ -20,7 +20,7 @@ export const getUser = () => {
     }
 }
 
-const reducer = (state = [], action) => {
+const reducer = (state = null, action) => {
     switch(action.type){
         case "SET_USER":
             return action.data

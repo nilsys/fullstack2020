@@ -10,6 +10,7 @@ const Blogs = (props) => {
     const logout = () => {
         window.localStorage.removeItem("loggedInUser")
         props.setUser(null)
+        console.log("Logged out")
     }
 
     const handleNewLike = async (blogObject) => {
