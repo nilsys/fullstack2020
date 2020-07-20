@@ -7,7 +7,9 @@ import { useDispatch } from "react-redux"
 import { setUser } from "../reducers/userReducer"
 import { changeNotification } from "../reducers/notificationReducer"
 
-const Login = (props) => {
+import { Table, Form, Button } from "react-bootstrap"
+
+const Login = () => {
     const [ username, setUsername ] = useState("")
     const [ password, setPassword ] = useState("")
     const dispatch = useDispatch()
@@ -26,6 +28,7 @@ const Login = (props) => {
             setPassword("")
             setUsername("")
             dispatch(setUser(loginDetails))
+            dispatch(changeNotification("Succesfully logged in", 3))
         } catch (err){
             dispatch(changeNotification("Wrong username or password", 3))
         }
@@ -35,17 +38,21 @@ const Login = (props) => {
         <div>
             <h2>Log in to application</h2>
             <Notification/>
-            <form onSubmit={handleLogin}>
-                <div>
+            <Form onSubmit={handleLogin}>
+                <Form.Group>
+                <Form.Label>
                     Username:
-                    <input id="username" value={username} onChange={({ target }) => setUsername(target.value)}/>
-                </div>
-                <div>
+                    <Form.Control id="username" value={username} onChange={({ target }) => setUsername(target.value)}/>
+                </Form.Label>
+                <Form.Label>
                     Password:
-                    <input id="password" type="password" value={password} onChange={({ target }) => setPassword(target.value)}/>
+                    <Form.Control id="password" type="password" value={password} onChange={({ target }) => setPassword(target.value)}/>
+                </Form.Label>
+                <div>
+                    <Button type="submit">Login</Button>
                 </div>
-                <button type="submit">Login</button>
-            </form>
+                </Form.Group>
+            </Form>
         </div>
     )
 }

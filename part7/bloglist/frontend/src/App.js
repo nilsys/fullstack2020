@@ -7,6 +7,7 @@ import Login from "./components/Login"
 import Users from "./components/Users"
 import User from "./components/User"
 import Header from "./components/Header"
+import Notification from "./components/Notification"
 import { createAllBlogs } from "./reducers/blogReducer"
 import { setUser } from "./reducers/userReducer"
 import { setAllUsers } from "./reducers/allUsersReducer"
@@ -38,8 +39,9 @@ const App = (props) => {
     }
 
     return (
-        <div>
+        <div className="container">
             <Header/>
+            <Notification/>
             <Switch>
                 <Route path="/users/:id">
                     <User user={linkedUser}/>

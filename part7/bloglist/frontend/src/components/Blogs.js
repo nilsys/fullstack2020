@@ -1,5 +1,6 @@
 import React from "react"
 import CreateBlog from "./CreateBlog"
+import { Table } from 'react-bootstrap'
 import { Link } from "react-router-dom"
 import { connect } from "react-redux"
 import { setUser } from "../reducers/userReducer"
@@ -11,19 +12,31 @@ const Blogs = (props) => {
         <div>
             <CreateBlog />
             <div>
-                {props.blogs.sort((a, b) => {
-                    return b.likes - a.likes
-                }).map((blog) => {
-                    const url = `/blogs/${blog.id}`
-                    return (
-                        <Link to={url} key={blog.id}>
-                            <div className={"blogStyle"}>
-                                {blog.title}
-                            </div>
-                        </Link>
-                    )
-                
-                })}
+                <Table striped>
+                    <tbody>
+
+                    {props.blogs.sort((a, b) => {
+                        return b.likes - a.likes
+                    }).map((blog) => {
+                        const url = `/blogs/${blog.id}`
+                        return (
+                            <tr key={blog.id}>
+                                <td>
+                                    <Link to={url}>
+                                        <div>
+                                            {blog.title}
+                                        </div>
+                                    </Link>
+                                </td>
+                                <td>
+                                    {blog.user.name}
+                                </td>
+                            </tr>
+                        )
+                        
+                    })}
+                    </tbody>
+                </Table>
             </div>
         </div>
     )

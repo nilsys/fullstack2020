@@ -1,9 +1,9 @@
 import React from "react"
 import { connect } from "react-redux"
-import { deleteBlog, likeBlog } from "../reducers/blogReducer"
 import { Link } from "react-router-dom"
+import { Button, Table } from "react-bootstrap"
+import { deleteBlog, likeBlog } from "../reducers/blogReducer"
 import Comments from "./Comments"
-import "../index.css"
 
 
 const Blog = (props) => {
@@ -35,22 +35,22 @@ const Blog = (props) => {
     }
 
     return (
-        <div>
+        <div className={"mt-3 pt-1"}>
             <h2>
                 {blog.title}
             </h2>
                 <div className={"url"}>
                     <a href={blog.url}>{blog.url}</a>
                 </div>
-                <div className={"likes"}>
+                <div className={"font-weight-bold"}>
                     {blog.likes}
-                    <button type="button" onClick={() => handleNewLike(blog)}>Like</button>
-                </div>
-                <div style={showDelete}>
-                    <button onClick={() => handleBlogDelete(blog)} type="button">Delete</button>
+                    <Button size="sm" type="button" onClick={() => handleNewLike(blog)}>Like</Button>
                 </div>
                 <div className={"Author"}>
                     Added by {blog.user.name}
+                </div>
+                <div className={"mt-2"} style={showDelete}>
+                    <Button size="sm" onClick={() => handleBlogDelete(blog)} type="button">Delete blog</Button>
                 </div>
                 <Comments blog={blog}/>
         </div>

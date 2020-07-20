@@ -2,7 +2,7 @@ import React from "react"
 import { connect } from "react-redux"
 import { setUser } from "../reducers/userReducer"
 import { Link } from "react-router-dom"
-import "../index.css"
+import { Navbar, Nav, Button } from "react-bootstrap"
 
 const Header = (props) => {
 
@@ -14,13 +14,21 @@ const Header = (props) => {
 
     return (
         <div>
-            <div className="navbar">
-                <Link className="navitem" to="/blogs">Blogs</Link>
-                <Link className="navitem" to="/users">Users</Link>
-                {props.user.name} logged in
-                <button onClick={() => logout()}>Logout</button>
-            </div>
-            <h2>Blogs</h2>
+            <Navbar bg="dark" variant="dark">
+                <Navbar.Brand>Blogs</Navbar.Brand>
+                <Nav className="mr-auto">
+                    <Nav.Link href="#" as="span">
+                        <Link to="/blogs">Blogs</Link>
+                    </Nav.Link>
+                    <Nav.Link href="#" as="span">
+                        <Link to="/users">Users</Link>
+                    </Nav.Link>
+                    <Navbar.Text>
+                        <em>{props.user.name} logged in</em>
+                        <Button size="sm" onClick={() => logout()}>Logout</Button>
+                    </Navbar.Text>
+                </Nav>
+            </Navbar>
         </div>
     )
 }
