@@ -1,5 +1,4 @@
 import React from "react"
-import { connect } from "react-redux"
 
 const User = ({user}) => {
     if (!user){
@@ -22,16 +21,5 @@ const User = ({user}) => {
     )
 }
 
-const mapStateToProps = (state) => {
-    return {
-        allUsers: state.allUsers
-    }
-  }
-
-
-const ConnectedUser = connect(
-    mapStateToProps,
-    null
-)(User)
 
 export default User

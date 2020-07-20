@@ -54,6 +54,22 @@ export const likeBlog = (blog) => {
     }
 }
 
+export const addComment = (comment, id) => {
+    return async dispatch => {
+        const newComment = {
+            comments: comment
+        }
+        const resp = await blogService.addNewComment(newComment, id)
+        dispatch({
+            type: "ADD_COMMENT",
+            data: {
+                resp,
+                id
+            }
+        })
+    }
+}
+
 const reducer = (state = [], action) => {
     switch(action.type){
         case "VOTE_BLOG":
@@ -65,6 +81,11 @@ const reducer = (state = [], action) => {
 
         case "ADD_ALL_BLOGS":
             return action.data
+
+        case "ADD_COMMENT":
+            const commentBlog = state.find(b => b.id === action.data.id)
+            commentBlog.comments = action.data.resp.comments
+            return state.map(blog => blog.id !== commentBlog.id ? blog : commentBlog)
 
         case "DELETE_BLOG":
             return state.filter(blog => blog.id !== action.data.id)

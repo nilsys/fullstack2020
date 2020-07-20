@@ -1,8 +1,8 @@
 import React from "react"
 import { connect } from "react-redux"
-import Comment from "./Comment"
 import { deleteBlog, likeBlog } from "../reducers/blogReducer"
 import { Link } from "react-router-dom"
+import Comments from "./Comments"
 import "../index.css"
 
 
@@ -52,14 +52,7 @@ const Blog = (props) => {
                 <div className={"Author"}>
                     Added by {blog.user.name}
                 </div>
-                <div>
-                    <h3>Comments</h3>
-                    <ul>
-                        {blog.comments.map(comment => {
-                            return <li>{comment}</li>
-                        })}
-                    </ul>
-                </div>
+                <Comments blog={blog}/>
         </div>
     )
 }
