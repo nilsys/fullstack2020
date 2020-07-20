@@ -11,7 +11,6 @@ export const getUsers = () => {
 export const setAllUsers = () => {
     return async dispatch => {
         const data = await userService.getAllUsers()
-        console.log(data)
         dispatch({
             type: "SET_ALL_USERS",
             data

@@ -1,24 +1,12 @@
 import React from "react"
 import Blog from "./Blog"
 import CreateBlog from "./CreateBlog"
-
+import { Link } from "react-router-dom"
 import { connect } from "react-redux"
-import { deleteBlog, likeBlog } from "../reducers/blogReducer"
 import { setUser } from "../reducers/userReducer"
+import "../index.css"
 
 const Blogs = (props) => {
-
-    const handleNewLike = async (blogObject) => {
-        props.likeBlog(blogObject)
-    }
-
-    const handleBlogDelete = async (deleteBlog) => {
-        const confirmation = `Remove blog ${deleteBlog.name} by ${deleteBlog.author}?`
-
-        if (window.confirm(confirmation)) {
-            props.deleteBlog(deleteBlog)
-        }
-    }
 
     return (
         <div>
@@ -27,8 +15,14 @@ const Blogs = (props) => {
                 {props.blogs.sort((a, b) => {
                     return b.likes - a.likes
                 }).map((blog) => {
-                    return <Blog key={blog.id} blog={blog} user={props.user}
-                        handleNewLike={handleNewLike} handleBlogDelete={handleBlogDelete} />
+                    const url = `/blogs/${blog.id}`
+                    return (
+                        <Link to={url} key={blog.id}>
+                            <div className={"blogStyle"}>
+                                {blog.title}
+                            </div>
+                        </Link>
+                    )
                 
                 })}
             </div>
@@ -44,8 +38,6 @@ const mapStateToProps = (state) => {
   }
 
 const mapDispatchToProps = {
-    deleteBlog,
-    likeBlog,
     setUser
 }
 
