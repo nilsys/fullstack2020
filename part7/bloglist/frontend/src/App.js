@@ -1,9 +1,10 @@
 import React, {useEffect } from "react"
 import { connect } from "react-redux"
-import { Switch, Route, Redirect } from "react-router-dom"
+import { Switch, Route, useRouteMatch } from "react-router-dom"
 import Blogs from "./components/Blogs"
 import Login from "./components/Login"
 import Users from "./components/Users"
+import User from "./components/User"
 import Header from "./components/Header"
 import { createAllBlogs } from "./reducers/blogReducer"
 import { setUser } from "./reducers/userReducer"
@@ -25,6 +26,10 @@ const App = (props) => {
         }
     }, [])
 
+    // Link the correct user
+    const match = useRouteMatch("/users/:id")
+    const linkedUser = match ? props.allUsers.find(u => u.id === match.params.id) : null
+
     if (props.user === null) {
         return <Login/>
     }
@@ -33,6 +38,9 @@ const App = (props) => {
         <div>
             <Header/>
             <Switch>
+                <Route path="/users/:id">
+                    <User user={linkedUser}/>
+                </Route>
                 <Route path="/users">
                     <Users/> 
                  </Route>
