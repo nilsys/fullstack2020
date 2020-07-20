@@ -7,11 +7,6 @@ import { deleteBlog, likeBlog } from "../reducers/blogReducer"
 import { setUser } from "../reducers/userReducer"
 
 const Blogs = (props) => {
-    const logout = () => {
-        window.localStorage.removeItem("loggedInUser")
-        props.setUser(null)
-        console.log("Logged out")
-    }
 
     const handleNewLike = async (blogObject) => {
         props.likeBlog(blogObject)
@@ -27,11 +22,6 @@ const Blogs = (props) => {
 
     return (
         <div>
-            <h2>Blogs</h2>
-            <div>
-                {props.user.name} logged in
-                <button onClick={() => logout()}>Logout</button>
-            </div>
             <CreateBlog />
             <div>
                 {props.blogs.sort((a, b) => {
