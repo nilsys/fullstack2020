@@ -1,5 +1,4 @@
 import React from "react"
-import Blog from "./Blog"
 import CreateBlog from "./CreateBlog"
 import { Link } from "react-router-dom"
 import { connect } from "react-redux"

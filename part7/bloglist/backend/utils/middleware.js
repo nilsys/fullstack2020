@@ -7,7 +7,7 @@ const handleErrors = (error, req, resp, next) => {
     } else if (error.name === "MongoError") {
         return resp.status(400).send({ error: error })
     }else if (error.name === "TypeError") {
-        return resp.status(400).send({ error: "Server goofed" })
+        return resp.status(400).send({ error: error })
     } else if (error.name === "JsonWebTokenError"){
         return resp.status(401).send({ error: "Invalid or missing token" })
     }

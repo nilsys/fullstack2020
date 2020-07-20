@@ -1,0 +1,6 @@
+POST http://localhost:3001/api/blogs/5f158a15276d0536b659f2e5/comments
+Content-Type: application/json
+
+{
+    "comments": "GOOD MEME"
+}

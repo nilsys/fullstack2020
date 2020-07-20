@@ -1,6 +1,8 @@
 import React from "react"
 import { connect } from "react-redux"
 import { setUser } from "../reducers/userReducer"
+import { Link } from "react-router-dom"
+import "../index.css"
 
 const Header = (props) => {
 
@@ -12,11 +14,13 @@ const Header = (props) => {
 
     return (
         <div>
-            <h2>Blogs</h2>
-            <div>
+            <div className="navbar">
+                <Link className="navitem" to="/blogs">Blogs</Link>
+                <Link className="navitem" to="/users">Users</Link>
                 {props.user.name} logged in
                 <button onClick={() => logout()}>Logout</button>
             </div>
+            <h2>Blogs</h2>
         </div>
     )
 }

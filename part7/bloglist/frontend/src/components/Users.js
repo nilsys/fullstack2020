@@ -9,14 +9,18 @@ const Users = (props) => {
             <h2>Users</h2>
             <div>
                 <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Blogs created</th>
+                        </tr>
+                    </thead>
                     <tbody>
-                        <th>Name</th>
-                        <th>Blogs created</th>
                         {props.allUsers.map(user => {
                             const url = `/users/${user.id}`
                             return (
-                                <tr>
-                                    <td> <Link to={url}>{user.name}</Link> </td>
+                                <tr key={user.id}>
+                                    <td><Link to={url}>{user.name}</Link></td>
                                     <td>{user.blogs.length}</td>
                                 </tr>
                             )

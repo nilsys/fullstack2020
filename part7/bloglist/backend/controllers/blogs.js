@@ -26,6 +26,7 @@ blogsRouter.post("/", async (request, response) => {
         author: body.author,
         url: body.url,
         likes: body.likes,
+        comments: [],
         user: user._id
     })
 
@@ -45,6 +46,32 @@ blogsRouter.post("/", async (request, response) => {
     await user.save()
 
     return response.status(201).json(result)
+})
+
+blogsRouter.post("/:id/comments", async (req, resp) => {
+    const body = req.body
+    const blogId = req.params.id
+    
+    const decodedToken = jwt.verify(req.token, process.env.SECRET_HASH) 
+    if (!(req.token || !decodedToken)){
+        return resp.status(401).json({
+            error: "Invalid or missing token"
+        })
+    }
+
+    const blog = await Blog.findById(blogId)
+
+    if (!blog){
+        return resp.status(404).json({
+            error: "Blog doesn't exist"
+        })
+    }
+    const newBlog = {
+        comments: blog.comments.concat(body.comments)
+    }
+
+    const result = await Blog.findByIdAndUpdate(blogId, newBlog, { new: true })
+    return resp.status(200).json(result)
 })
 
 blogsRouter.delete("/:id", async (req, resp) => {

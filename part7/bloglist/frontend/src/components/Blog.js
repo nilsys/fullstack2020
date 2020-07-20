@@ -1,5 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
+import Comment from "./Comment"
 import { deleteBlog, likeBlog } from "../reducers/blogReducer"
 import { Link } from "react-router-dom"
 import "../index.css"
@@ -16,7 +17,6 @@ const Blog = (props) => {
             </div>
         )
     }
-
 
     const blog = props.blog
     const user = props.user
@@ -46,11 +46,19 @@ const Blog = (props) => {
                     {blog.likes}
                     <button type="button" onClick={() => handleNewLike(blog)}>Like</button>
                 </div>
+                <div style={showDelete}>
+                    <button onClick={() => handleBlogDelete(blog)} type="button">Delete</button>
+                </div>
                 <div className={"Author"}>
                     Added by {blog.user.name}
                 </div>
-                <div style={showDelete}>
-                    <button onClick={() => handleBlogDelete(blog)} type="button">Delete</button>
+                <div>
+                    <h3>Comments</h3>
+                    <ul>
+                        {blog.comments.map(comment => {
+                            return <li>{comment}</li>
+                        })}
+                    </ul>
                 </div>
         </div>
     )
