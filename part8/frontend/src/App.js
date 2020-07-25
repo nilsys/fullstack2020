@@ -1,35 +1,34 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { Switch, Route, Link } from "react-router-dom"
 import Authors from './components/Authors'
 import Books from './components/Books'
 import NewBook from './components/NewBook'
-import { useQuery } from "@apollo/client"
-import { ALL_AUTHORS, ALL_BOOKS } from "./queries"
 
 const App = () => {
-    const [page, setPage] = useState('authors')
+    const padding = {
+        padding: 5
+      }
 
 return (
     <div>
         <div>
-            <button onClick={() => setPage('authors')}>authors</button>
-            <button onClick={() => setPage('books')}>books</button>
-            <button onClick={() => setPage('add')}>add book</button>
+            <Link style={padding} to="/">Authors</Link>
+            <Link style={padding} to="/books">Books</Link>
+            <Link style={padding} to="/newbook">New book</Link>
       </div>
 
-      <Authors
-        authors={useQuery(ALL_AUTHORS)}
-        show={page === 'authors'}
-      />
-
-      <Books
-        books={useQuery(ALL_BOOKS)}
-        show={page === 'books'}
-      />
-
-      <NewBook
-        show={page === 'add'}
-      />
-
+    <Switch>
+        <Route path="/books">
+            <Books/>
+        </Route>
+        <Route path="/newbook">
+            <NewBook/>
+        </Route>
+        <Route path="/">
+            <Authors/>
+        </Route>
+    </Switch>
+     
     </div>
   )
 }
