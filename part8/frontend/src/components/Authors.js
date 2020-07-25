@@ -1,6 +1,4 @@
-import React, { useEffect } from 'react'
-import { useQuery } from "@apollo/client"
-import { ALL_AUTHORS } from "../queries"
+import React from 'react'
 
 const Authors = (props) => {
     if (!props.show) {
