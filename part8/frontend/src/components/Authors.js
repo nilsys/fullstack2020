@@ -26,7 +26,7 @@ const Authors = () => {
                     </th>
                 </tr>
                 {result.data.allAuthors.map(a =>
-                    <tr key={a.name + a.born}>
+                    <tr key={a.name}>
                         <td>{a.name}</td>
                         <td>{a.born}</td>
                         <td>{a.bookCount}</td>

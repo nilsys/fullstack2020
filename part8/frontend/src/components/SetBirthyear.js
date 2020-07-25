@@ -1,5 +1,5 @@
 import React, {useState} from "react"
-import {useMutation} from "@apollo/client"
+import {useMutation, useQuery} from "@apollo/client"
 import { UPDATE_YEAR, ALL_AUTHORS } from "../queries"
 
 const SetBirthyear = () => {
@@ -12,10 +12,11 @@ const SetBirthyear = () => {
         }
       })
 
+    const authors = useQuery(ALL_AUTHORS)
+
     const handleSubmit = (e) => {
         e.preventDefault()
         updateYear({ variables: {name, setBornTo}})
-        setName("")
         setYear("")
     }
 
@@ -24,7 +25,11 @@ const SetBirthyear = () => {
             <h2>Set Birthyear</h2>
             <form onSubmit={handleSubmit}>
                 <div>
-                    Name: <input value={name} onChange={e => setName(e.target.value)}/>
+                    <select value={name} onChange={e => setName(e.target.value)}>
+                        {authors.data.allAuthors.map(a => {
+                            return <option key={a.name} value={a.name}>{a.name}</option>
+                        })}
+                    </select>
                 </div>
                 <div>
                     Born: <input value={setBornTo} onChange={e => setYear(Number(e.target.value))}/>
