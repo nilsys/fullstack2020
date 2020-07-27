@@ -1,5 +1,4 @@
-const { ApolloServer, gql } = require('apollo-server')
-const {v1: uuid} = require("uuid")
+const { ApolloServer, gql, UserInputError } = require('apollo-server')
 require("dotenv").config()
 const mongoose = require('mongoose')
 const Book = require("./models/book")
@@ -112,16 +111,35 @@ const resolvers = {
             genres: args.genres,
             author: author
         })
-        console.log(`Book ${args.title} created`)
-        return book.save()
+
+        try {
+            console.log(`Book ${args.title} created`)
+            await book.save()
+        } catch (error) {
+            console.log("Error creating new book")
+            throw new UserInputError("Invalid arguments", {
+                invalidArgs: args
+            })
+        }
+        return book
     },
     editAuthor: async (root, args) => {
         const author = await Author.findOne({name: args.name})
         author.born = args.setBornTo
-        return author.save()
+        try {
+            await author.save()    
+        } catch (error) {
+            console.log("Error editing author")
+            throw new UserInputError("Invalid form", {
+                invalidArgs: args
+            })
+        }
+        return author
     }
   }
-}
+
+  }
+
 
 const server = new ApolloServer({
   typeDefs,
