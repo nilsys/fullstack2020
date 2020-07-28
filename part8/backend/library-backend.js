@@ -113,11 +113,11 @@ const resolvers = {
         })
 
         try {
-            console.log(`Book ${args.title} created`)
             await book.save()
+            console.log(`Book ${args.title} created`)
         } catch (error) {
             console.log("Error creating new book")
-            throw new UserInputError("Invalid arguments", {
+            throw new UserInputError("Book exists already", {
                 invalidArgs: args
             })
         }
@@ -125,15 +125,13 @@ const resolvers = {
     },
     editAuthor: async (root, args) => {
         const author = await Author.findOne({name: args.name})
-        author.born = args.setBornTo
-        try {
-            await author.save()    
-        } catch (error) {
-            console.log("Error editing author")
-            throw new UserInputError("Invalid form", {
+        if (!author){
+            throw new UserInputError("Invalid author", {
                 invalidArgs: args
             })
         }
+        author.born = args.setBornTo
+        await author.save()     
         return author
     }
   }
