@@ -16,8 +16,8 @@ const SetBirthyear = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        updateYear({ variables: {name, setBornTo}})
         setYear("")
+        updateYear({ variables: {name, setBornTo}})
     }
 
     return (
@@ -27,7 +27,6 @@ const SetBirthyear = () => {
                 <div>
                     <select value={name} onChange={e => setName(e.target.value)}>
                         {authors.data.allAuthors.map(a => {
-                            if (name === "") setName(a.name)
                             return <option key={a.name} value={a.name}>{a.name}</option>
                         })}
                     </select>

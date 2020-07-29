@@ -52,3 +52,15 @@ export const UPDATE_YEAR = gql`
         }
     }
 `
+
+export const LOGIN_QUERY = gql`
+    mutation loginUser ($username: String!, $password: String!){
+        login(
+            username: $username,
+            password: $password
+        ){
+            value
+        }
+    }
+
+`
