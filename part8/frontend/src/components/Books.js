@@ -4,9 +4,9 @@ import { BOOKS_BY_GENRE, ALL_BOOKS } from "../queries"
 import Filters from "./Filters"
 
 const Books = () => {
+    const [filters, setFilters] = useState("")
     const allBooks = useQuery(ALL_BOOKS)
     const [getBooks, result] = useLazyQuery(BOOKS_BY_GENRE)
-    const [filters, setFilters] = useState("")
     const [books, setBooks] = useState([])
 
     useEffect(() => {
@@ -16,10 +16,6 @@ const Books = () => {
         }
     }, [result.data, filters]) //eslint-disable-line
 
-    if (result.loading || allBooks.loading){
-        return <div>Loading..</div>
-    }
-
 
     return (
         <div>
@@ -28,8 +24,9 @@ const Books = () => {
             <div>
                 Filtering by genre {filters ? <b>{filters}</b> : <i>None</i>}
             </div>
-            <Filters books={allBooks.data.allBooks} filters={filters} setFilters={setFilters} />
-
+            {!allBooks.loading ?
+            <Filters books={allBooks.data.allBooks} filters={filters} setFilters={setFilters} /> : null}
+            
             <table>
                 <tbody>
                 <tr>
@@ -41,13 +38,20 @@ const Books = () => {
                     Published
                     </th>
                 </tr>
-                {books.map(a =>
+                
+                {!result.loading ? books.map(a =>
                     <tr key={a.title}>
                     <td>{a.title}</td>
                     <td>{a.author.name}</td>
                     <td>{a.published}</td>
                     </tr>
-                )}
+                ) :
+                <tr>
+                    <td>
+                        Loading...
+                    </td>
+                </tr>
+                }
                 </tbody>
             </table>
         </div>

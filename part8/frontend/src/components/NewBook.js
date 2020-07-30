@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useMutation } from "@apollo/client"
-import { CREATE_BOOK, ALL_BOOKS, ALL_AUTHORS } from "../queries"
+import { CREATE_BOOK, ALL_BOOKS, ALL_AUTHORS, BOOKS_BY_GENRE } from "../queries"
 
 const NewBook = () => {
     const [title, setTitle] = useState('')
@@ -8,23 +8,37 @@ const NewBook = () => {
     const [published, setPublished] = useState('')
     const [genre, setGenre] = useState('')
     const [genres, setGenres] = useState([])
+    const [update, setUpdate] = useState(false)
+
+    // My names spagoooooooooot
+    const handleUpdate = () => {
+        const query = genres.map(genre => {
+            return {query: BOOKS_BY_GENRE, variables: {genre: genre}}
+        })
+        if (update) {
+            setGenres([])
+            setUpdate(false)
+        }
+        query.push({query: BOOKS_BY_GENRE, variables: {genre: ""}})
+        return query
+    }
 
     const [ createBook ] = useMutation(CREATE_BOOK, {
-        refetchQueries: [ { query: ALL_BOOKS}, {query: ALL_AUTHORS } ],
+        refetchQueries: [{ query: ALL_BOOKS}, {query: ALL_AUTHORS }].concat(handleUpdate()),
         onError: (err) => {
             console.log(err)
         }
-      })
+    })
+    
 
     const submit = async (event) => {
         event.preventDefault()
         createBook({ variables: {title, author, published, genres}})
-
         setTitle('')
         setPublished('')
         setAuhtor('')
-        setGenres([])
         setGenre('')
+        setUpdate(true)
     }
 
     const addGenre = () => {
