@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react'
-import {useApolloClient} from "@apollo/client"
+import {useApolloClient, useSubscription} from "@apollo/client"
 import { Switch, Route, Link, Redirect } from "react-router-dom"
 import Authors from './components/Authors'
 import Books from './components/Books'
 import NewBook from './components/NewBook'
 import Login from "./components/Login"
 import Recommends from "./components/Recommends"
+import { BOOK_ADDED } from "./queries"
 
 
 const App = () => {
@@ -18,6 +19,14 @@ const App = () => {
             setToken(user)
         }
     }, [])
+
+    useSubscription(BOOK_ADDED, {
+        onSubscriptionData: ({subscriptionData}) => {
+            const data = subscriptionData.data.bookAdded
+            console.log(data)
+            window.alert(`${data.title} published in ${data.published} by ${data.author.name} created!`)
+        }
+    })
 
     const logout = () => {
         setToken(null)
